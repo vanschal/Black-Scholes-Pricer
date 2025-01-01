@@ -36,3 +36,25 @@ def save_outputs_to_db(calculation_id, spot_range, vol_range, call_pnl, put_pnl)
     connection.commit()
     cursor.close()
     connection.close()
+
+"""
+Below is the code to initialize the SQL inputs and outputs table that corresponds to the functionality
+
+CREATE TABLE inputs (
+    Spot DECIMAL(10, 2),
+    Strike DECIMAL(10, 2),
+    InterestRate DECIMAL(5, 4),
+    Volatility DECIMAL(5, 4),
+    TimeToExp DECIMAL(5, 2),
+    CalculationId VARCHAR(36) PRIMARY KEY
+);
+
+CREATE TABLE outputs (
+    CalculationId VARCHAR(36),
+    SpotShock DECIMAL(10, 2),
+    VolShock DECIMAL(5, 4),
+    OptionType ENUM('CALL', 'PUT'),
+    Value DECIMAL(10, 2),
+    FOREIGN KEY (CalculationId) REFERENCES inputs(CalculationId)
+);
+"""
